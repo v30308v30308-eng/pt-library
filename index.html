@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物理治療動作資料庫</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <h1>物理治療動作資料庫</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="filters-section">
+            <div class="filter-group">
+                <span class="filter-label">類型</span>
+                <div class="filter-buttons" data-filter-group="category">
+                    <button class="filter-btn active" data-value="all">全部</button>
+                    <button class="filter-btn strength-btn" data-value="strength">肌力</button>
+                    <button class="filter-btn mobility-btn" data-value="mobility">活動度</button>
+                    <button class="filter-btn control-btn" data-value="control">控制</button>
+                </div>
+            </div>
+            <div class="filter-group subtype-group" id="subtype-group">
+                <span class="filter-label">活動度</span>
+                <div class="filter-buttons" data-filter-group="subtype">
+                    <button class="filter-btn active" data-value="all">全部</button>
+                    <button class="filter-btn stretching-btn" data-value="stretching">Stretching</button>
+                    <button class="filter-btn rom-btn" data-value="rom">ROM</button>
+                    <button class="filter-btn jointplay-btn" data-value="jointplay">Joint Play</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">難易度</span>
+                <div class="filter-buttons" data-filter-group="level">
+                    <button class="filter-btn active" data-value="all">全部</button>
+                    <button class="filter-btn beginner-btn" data-value="beginner">初階</button>
+                    <button class="filter-btn intermediate-btn" data-value="intermediate">中階</button>
+                    <button class="filter-btn advanced-btn" data-value="advanced">進階</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <span class="filter-label">關節</span>
+                <div class="filter-buttons" data-filter-group="joint">
+                    <button class="filter-btn active" data-value="all">全部</button>
+                    <button class="filter-btn" data-value="頸椎">頸椎</button>
+                    <button class="filter-btn" data-value="胸椎">胸椎</button>
+                    <button class="filter-btn" data-value="腰椎">腰椎</button>
+                    <button class="filter-btn" data-value="核心">核心</button>
+                    <button class="filter-btn" data-value="肩">肩</button>
+                    <button class="filter-btn" data-value="肘">肘</button>
+                    <button class="filter-btn" data-value="腕">腕</button>
+                    <button class="filter-btn" data-value="髖">髖</button>
+                    <button class="filter-btn" data-value="膝">膝</button>
+                    <button class="filter-btn" data-value="踝">踝</button>
+                    <button class="filter-btn" data-value="全身">全身</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="results-bar">
+            <span id="result-count"></span>
+            <button class="reset-btn" id="reset-btn">重設篩選</button>
+        </div>
+
+        <section class="exercise-grid" id="exercise-grid"></section>
+
+        <div class="empty-state" id="empty-state">
+            <p>沒有符合條件的動作</p>
+        </div>
+
+        <div class="pagination" id="pagination"></div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-item">
+                <a href="mailto:v30308v30308@gmail.com" class="footer-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    v30308v30308@gmail.com
+                </a>
+                <p class="footer-desc">動作有問題或想新增動作，歡迎直接來信</p>
+            </div>
+            <div class="footer-item">
+                <a href="https://lin.ee/x3DIGr3" target="_blank" rel="noopener noreferrer" class="footer-link footer-line">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.070 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+                    LINE 官方帳號
+                </a>
+                <p class="footer-desc">有治療需求請加官方 LINE</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close" aria-label="關閉">✕</button>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="">
+    </div>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal" role="dialog">
+            <button class="modal-close" id="modal-close" aria-label="關閉">✕</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
